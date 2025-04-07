@@ -1,0 +1,478 @@
+/* =================================
+   Variables & Reset
+   ================================= */
+   :root {
+    --primary-color: #00796b; /* Vert sarcelle foncé (associé à l'environnement/sérieux) */
+    --secondary-color: #f9a825; /* Jaune/Orange (dynamisme, Afrique) */
+    --light-bg-color: #f4f6f8; /* Gris très clair pour les sections alternées */
+    --text-color: #333;
+    --heading-color: #1a1a1a;
+    --white-color: #ffffff;
+    --footer-bg-color: #263238; /* Gris foncé pour le footer */
+
+    --font-primary: 'Poppins', sans-serif;
+    --base-font-size: 16px;
+    --line-height-base: 1.6;
+
+    --container-max-width: 1140px;
+    --spacing-unit: 1rem; /* 16px */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Défilement doux pour les ancres */
+    font-size: var(--base-font-size);
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: var(--line-height-base);
+    color: var(--text-color);
+    background-color: var(--white-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    line-height: 1.3;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: var(--spacing-unit);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none; /* On enlève les puces par défaut */
+    padding-left: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =================================
+   Layout & Container
+   ================================= */
+.container {
+    width: 90%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-unit);
+    padding-right: var(--spacing-unit);
+}
+
+/* =================================
+   Header & Navigation
+   ================================= */
+.site-header {
+    background-color: var(--white-color);
+    padding: var(--spacing-unit) 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky; /* Garde le header en haut */
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--heading-color);
+    text-decoration: none;
+}
+.logo a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.main-nav .nav-list {
+    display: flex;
+    gap: calc(var(--spacing-unit) * 1.5);
+}
+
+.main-nav a {
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+    color: var(--text-color);
+}
+.main-nav a::after { /* Soulignement subtil au survol */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+    -webkit-transition: width 0.3s ease;
+}
+.main-nav a:hover::after {
+    width: 100%;
+    left: 0;
+    background-color: var(--secondary-color);
+}
+.main-nav a:hover, .main-nav a:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: none; /* Caché par défaut sur les grands écrans */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+/* =================================
+   Hero Section
+   ================================= */
+.hero-section {
+    background-color: var(--primary-color); /* Ou une image de fond */
+    /* background-image: url('../images/hero-background.jpg'); */
+    background-size: cover;
+    background-position: center;
+    color: var(--white-color);
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 5) 0;
+    min-height: 60vh; /* Hauteur minimale */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-section h1 {
+    color: var(--white-color);
+    margin-bottom: var(--spacing-unit);
+}
+
+.hero-section .subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* =================================
+   Content Sections
+   ================================= */
+.content-section {
+    padding: calc(var(--spacing-unit) * 4) 0;
+}
+
+.content-section.bg-light {
+    background-color: var(--light-bg-color);
+}
+
+.content-section h2 {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    position: relative;
+    display: inline-block; /* Permet au pseudo-élément d'être positionné correctement */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Soulignement décoratif pour les titres de section */
+.content-section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 0.5rem auto 0; /* Centrage automatique si display: block */
+    /* Pour inline-block: */
+    /* position: absolute; */
+    /* bottom: -10px; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+}
+
+
+/* Section Mission & Vision en 2 colonnes */
+.section-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--spacing-unit) * 3);
+    align-items: start; /* Aligne les éléments en haut */
+}
+
+.text-block {
+    padding: var(--spacing-unit);
+}
+.text-block h2 {
+    text-align: left; /* Aligne à gauche dans les colonnes */
+    margin-bottom: var(--spacing-unit);
+    position: static; /* Annule le positionnement relatif hérité */
+    left: auto;
+    transform: none;
+    display: block; /* Retour à l'affichage normal */
+}
+.text-block h2::after {
+    display: none; /* Cache le soulignement centralisé ici */
+}
+
+/* =================================
+   Objectives List
+   ================================= */
+.objectives-list {
+    list-style: none;
+    padding-left: 0;
+    max-width: 800px; /* Limite la largeur pour la lisibilité */
+    margin: 0 auto; /* Centre la liste */
+}
+
+.objectives-list li {
+    background-color: var(--light-bg-color);
+    border-left: 5px solid var(--primary-color);
+    padding: calc(var(--spacing-unit) * 1.5);
+    margin-bottom: var(--spacing-unit);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.objectives-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+}
+
+/* =================================
+   Key Facts Section ("Importance")
+   ================================= */
+.key-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--spacing-unit) * 2);
+    margin-top: calc(var(--spacing-unit) * 2);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.fact-card {
+    background-color: var(--white-color);
+    padding: calc(var(--spacing-unit) * 1.5);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid var(--secondary-color);
+    display: flex;
+    flex-direction: column; /* Pour que la citation soit en bas */
+    min-height: 200px; /* Hauteur minimale pour aligner visuellement */
+}
+
+.fact-card h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-unit);
+    font-size: 1.3rem;
+}
+
+.fact-card p {
+    flex-grow: 1; /* Fait grandir le paragraphe pour pousser la citation vers le bas */
+    margin-bottom: var(--spacing-unit); /* Espace avant la citation */
+}
+
+.fact-card strong {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.citation {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: auto; /* Pousse la citation en bas */
+    font-style: italic;
+    align-self: flex-start; /* Aligne à gauche */
+    padding-top: 0.5rem;
+    border-top: 1px dashed #eee; /* Ligne de séparation */
+    width: 100%;
+}
+
+.intro-text, .conclusion-text {
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.intro-text {
+    font-size: 1.1rem;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+.conclusion-text {
+    margin-top: calc(var(--spacing-unit) * 2);
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+
+/* =================================
+   Contact Section (Exemple)
+   ================================= */
+.contact-section {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+.contact-section h2 {
+    color: var(--white-color);
+}
+.contact-section h2::after {
+    background-color: var(--white-color); /* Soulignement blanc */
+}
+.contact-section p {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    opacity: 0.9;
+}
+.contact-section .cta-button {
+    background-color: var(--secondary-color);
+    color: var(--heading-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    margin-bottom: var(--spacing-unit);
+}
+.contact-section .cta-button:hover {
+    background-color: #e0920e; /* Version un peu plus foncée de secondary */
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* =================================
+   Footer
+   ================================= */
+.site-footer {
+    background-color: var(--footer-bg-color);
+    color: rgba(255, 255, 255, 0.7);
+    padding: calc(var(--spacing-unit) * 2) 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+/* Optionnel: Styles pour les liens sociaux dans le footer */
+/* .social-links { margin-top: var(--spacing-unit); } */
+/* .social-links a { color: var(--white-color); margin: 0 0.5rem; font-size: 1.2rem; text-decoration: none; } */
+/* .social-links a:hover { color: var(--secondary-color); } */
+
+/* =================================
+   Responsive Design
+   ================================= */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px; /* Ajuste légèrement la taille de base sur mobile */
+    }
+
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+
+    /* Navigation Mobile */
+    .main-nav .nav-list {
+        display: none; /* Cache la liste par défaut */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Juste en dessous du header */
+        left: 0;
+        width: 100%;
+        background-color: var(--white-color);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: var(--spacing-unit) 0; /* Ajoute du padding vertical */
+        border-top: 1px solid #eee;
+        max-height: 0; /* Commence caché */
+        overflow: hidden; /* Cache le contenu dépassant */
+        transition: max-height 0.5s ease-in-out; /* Animation fluide */
+    }
+
+    .main-nav .nav-list.active {
+        display: flex; /* Rend visible lorsque la classe 'active' est ajoutée */
+        max-height: 500px; /* Hauteur suffisante pour le contenu */
+    }
+
+    .main-nav .nav-list li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav .nav-list a {
+        display: block; /* Prend toute la largeur */
+        padding: var(--spacing-unit) 0; /* Plus d'espace cliquable */
+        border-bottom: 1px solid #eee; /* Séparateur */
+    }
+    .main-nav .nav-list li:last-child a {
+        border-bottom: none; /* Pas de bordure pour le dernier élément */
+    }
+     .main-nav a::after {
+        display: none; /* Cache le soulignement sur mobile */
+    }
+
+    .menu-toggle {
+        display: block; /* Affiche le bouton hamburger */
+    }
+
+    .header-container {
+        /* Pas de changement majeur nécessaire ici grâce à flexbox */
+    }
+
+    .hero-section {
+        padding: calc(var(--spacing-unit) * 4) 0;
+        min-height: 40vh;
+    }
+
+    /* Ajuste les grilles pour mobile */
+    .section-container,
+    .key-facts-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        gap: calc(var(--spacing-unit) * 1.5);
+    }
+
+    .text-block {
+        padding: 0; /* Moins de padding interne sur mobile */
+    }
+    .text-block h2 {
+        text-align: center; /* Centre les titres dans les blocs sur mobile */
+    }
+}
+
+/* =================================
+   Utilities (Optionnel)
+   ================================= */
+.text-center { text-align: center; }
+.mt-1 { margin-top: var(--spacing-unit); }
+.mb-1 { margin-bottom: var(--spacing-unit); }
+/* etc. */
